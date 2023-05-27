@@ -11,22 +11,34 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Form(
         key: _keyForm,
-        child: Column(
-          children: [
-            const Text("Login Application"),
-            TextFormField(
-              controller: username,
-              decoration: const InputDecoration(
-                  hintText: "Username", labelText: "Username"),
-            ),
-            TextFormField(
-              controller: password,
-              decoration: const InputDecoration(
-                  hintText: "Username", labelText: "Username"),
-            )
-          ],
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 40),
+          child: Column(
+            children: [
+              const Text("Login Application"),
+              TextFormField(
+                controller: username,
+                decoration: const InputDecoration(
+                    hintText: "Username", labelText: "Username"),
+              ),
+              const SizedBox(height: 10),
+              TextFormField(
+                controller: password,
+                decoration: const InputDecoration(
+                    hintText: "Password", labelText: "Password"),
+              ),
+              const SizedBox(height: 10),
+              const FilledButton(
+                onPressed: null,
+                child: Center(
+                  child: Text("Login"),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
