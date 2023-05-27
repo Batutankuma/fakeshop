@@ -1,3 +1,4 @@
+import 'package:fakeshop/views/home_views.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarView extends StatefulWidget{
@@ -9,7 +10,7 @@ class NavigationBarView extends StatefulWidget{
 
 class _NavigationBarViewState extends State<NavigationBarView> {
   //list of the page or view navigator
-  List<Widget> viewUI = [Placeholder(),Placeholder(),Placeholder()];
+  List<Widget> viewUI = [HomeView(),Placeholder(),Placeholder()];
 
   //init index view page
   int indexView = 0;
@@ -23,13 +24,6 @@ class _NavigationBarViewState extends State<NavigationBarView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("FakeShop", style: TextStyle(fontWeight: FontWeight.w700),),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-        actions: const [
-          IconButton(onPressed: null, icon: Icon(Icons.shop))
-        ],
-      ),
       body: viewUI[indexView],
       bottomNavigationBar: BottomNavigationBar(
         onTap: changeView,
