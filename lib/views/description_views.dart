@@ -1,6 +1,7 @@
 import 'package:fakeshop/models/product_model.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class DescriptionView extends StatelessWidget {
   ProductModel productModel;
 

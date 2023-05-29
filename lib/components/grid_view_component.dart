@@ -4,24 +4,19 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class GridViewComponent extends StatelessWidget {
-  GridViewComponent({super.key});
-  ProductModel modelOne = ProductModel(
-      "1",
-      "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      109.95,
-      "men's clothing",
-      "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg");
-
+  List<ProductModel> listProducts; 
+   GridViewComponent({super.key,required this.listProducts});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      itemCount: listProducts.length,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           childAspectRatio: 0.7,
           crossAxisSpacing: 1,
           mainAxisSpacing: 2,
           crossAxisCount: 2),
       itemBuilder: (context, index) {
+         ProductModel modelOne = listProducts[index];
         return GestureDetector(
           onTap: () {
             Navigator.push(context, MaterialPageRoute(builder: (context)=> DescriptionView(productModel: modelOne)));

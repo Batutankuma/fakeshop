@@ -61,16 +61,16 @@ class CategoryViewState extends State<CategoryView>
         controller: _tabController,
         children:  <Widget>[
           Center(
-            child: GridViewComponent(),
+            child:Placeholder()// GridViewComponent(),
           ),
           Center(
-            child: GridViewComponent(),
+            child: Placeholder()// GridViewComponent(),
           ),
           Center(
-            child: GridViewComponent(),
+            child: Placeholder()// GridViewComponent(),
           ),
           Center(
-            child: GridViewComponent(),
+            child: Placeholder()// GridViewComponent(),
           ),
         ],
       ),

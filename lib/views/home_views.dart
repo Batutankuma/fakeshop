@@ -1,8 +1,19 @@
 import 'package:fakeshop/components/grid_view_component.dart';
+import 'package:fakeshop/models/product_model.dart';
+import 'package:fakeshop/services/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class HomeView extends StatelessWidget{
+class HomeView extends StatefulWidget{
   const HomeView({super.key});
+
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +26,18 @@ class HomeView extends StatelessWidget{
           IconButton(onPressed: null, icon: Icon(Icons.shop))
         ],
       ),
-      body: SizedBox(
-        child: GridViewComponent(),
+      body: FutureBuilder<List<ProductModel>>(
+        future: fetchProductList(http.Client()),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return GridViewComponent(listProducts: snapshot.data!);
+          }else if(snapshot.hasError){
+            print("object");
+          }
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       )
     );
   }
