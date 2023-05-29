@@ -1,5 +1,6 @@
 import 'package:fakeshop/views/category_view.dart';
 import 'package:fakeshop/views/home_views.dart';
+import 'package:fakeshop/views/setting_view.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBarView extends StatefulWidget{
@@ -11,7 +12,7 @@ class NavigationBarView extends StatefulWidget{
 
 class _NavigationBarViewState extends State<NavigationBarView> {
   //list of the page or view navigator
-  List<Widget> viewUI = [HomeView(),CategoryView(),Placeholder()];
+  List<Widget> viewUI = [HomeView(),CategoryView(),SettingView()];
 
   //init index view page
   int indexView = 0;

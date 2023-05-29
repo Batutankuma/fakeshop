@@ -31,6 +31,10 @@ class CategoryViewState extends State<CategoryView>
     return Scaffold(
       appBar: AppBar(
         title: const Text("Category", style: TextStyle(fontWeight: FontWeight.w700)),
+        actions: const [
+          IconButton(onPressed: null, icon: Icon(Icons.search)),
+          IconButton(onPressed: null, icon: Icon(Icons.shop))
+        ],
         bottom: TabBar(
           controller: _tabController,
           tabs: const <Widget>[
