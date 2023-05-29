@@ -9,9 +9,8 @@ class DescriptionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Description",style: TextStyle(
-          fontWeight: FontWeight.w700
-        )),
+        title: const Text("Description",
+            style: TextStyle(fontWeight: FontWeight.w700)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -40,13 +39,27 @@ class DescriptionView extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             //price
-            ElevatedButton(
-              onPressed: null,
-              child: Center(
-                child: Text(productModel.price.toString(), style: const TextStyle(
-                  fontWeight: FontWeight.w800,
-                  color: Colors.black
-                ),),
+            SizedBox(
+              child: Row(
+                children: [
+                  Flexible(
+                    flex: 4,
+                    child: ElevatedButton(
+                      onPressed: null,
+                      child: Center(
+                        child: Text(
+                          productModel.price.toString(),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.w800, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Flexible(
+                    flex: 1,
+                    child: IconButton(onPressed: null, icon: Icon(Icons.shop,color: Colors.black)),
+                  )
+                ],
               ),
             )
           ],
