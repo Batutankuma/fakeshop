@@ -1,5 +1,7 @@
 import 'package:fakeshop/components/navigation_view.dart';
+import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/firebase_options.dart';
+import 'package:fakeshop/views/login_views.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
         useMaterial3: true,
       ),
-      home: const NavigationBarView(),
+      home: fireAuth.currentUser == null
+          ? LoginView()
+          : const NavigationBarView(),
     );
   }
 }

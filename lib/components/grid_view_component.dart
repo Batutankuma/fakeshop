@@ -1,3 +1,4 @@
+import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
 import 'package:fakeshop/views/description_views.dart';
 import 'package:flutter/material.dart';
@@ -24,10 +25,11 @@ class GridViewComponent extends StatelessWidget {
           child: GestureDetector(
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          DescriptionView(productModel: modelOne)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DescriptionView(productModel: modelOne),
+                ),
+              );
             },
             child: Padding(
               padding: const EdgeInsets.all(5),
