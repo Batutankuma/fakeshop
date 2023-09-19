@@ -35,10 +35,11 @@ class _HomeViewState extends State<HomeView> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) return const LinearProgressIndicator();
           return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              child: GridViewComponent(
-                  listProducts:
-                      ProductModel.fetchProduit(snapshot.data!.docs)));
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: GridViewComponent(
+              listProducts: ProductModel.fetchProduit(snapshot.data!.docs),
+            ),
+          );
         },
       ),
     );

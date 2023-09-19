@@ -1,8 +1,7 @@
 import 'package:fakeshop/components/grid_view_component.dart';
+import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
-import 'package:fakeshop/services/product_service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class CategoryView extends StatefulWidget {
   const CategoryView({super.key});
@@ -32,54 +31,69 @@ class CategoryViewState extends State<CategoryView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text("Category".toUpperCase(),
-              style: const TextStyle(
-                  fontWeight: FontWeight.w700, color: Colors.white)),
-          actions: const [
-            IconButton(onPressed: null, icon: Icon(Icons.search)),
-            IconButton(onPressed: null, icon: Icon(Icons.shop))
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text("Category".toUpperCase(),
+            style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: Colors.white)),
+        actions: const [
+          IconButton(
+              onPressed: null, icon: Icon(Icons.search), color: Colors.white),
+          IconButton(
+              onPressed: null, icon: Icon(Icons.shop), color: Colors.white)
+        ],
+        bottom: TabBar(
+          labelColor: Colors.white,
+          controller: _tabController,
+          tabs: const <Widget>[
+            Tab(
+              text: "Men's clothing",
+              icon: Icon(Icons.person),
+            ),
+            Tab(
+              text: "Women's clothing",
+              icon: Icon(Icons.person_2),
+            ),
+            Tab(
+              text: "Jewelery",
+              icon: Icon(Icons.join_left),
+            ),
+            Tab(
+              text: "Electronics",
+              icon: Icon(Icons.tv),
+            ),
           ],
-          bottom: TabBar(
-            controller: _tabController,
-            tabs: const <Widget>[
-              Tab(
-                text: "Men's clothing",
-                icon: Icon(Icons.person),
-              ),
-              Tab(
-                text: "Women's clothing",
-                icon: Icon(Icons.person_2),
-              ),
-              Tab(
-                text: "Jewelery",
-                icon: Icon(Icons.join_left),
-              ),
-              Tab(
-                text: "Electronics",
-                icon: Icon(Icons.tv),
-              ),
-            ],
-          ),
         ),
-        body: FutureBuilder<List<ProductModel>>(
-          future: fetchProductList(http.Client()),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return TabBarViewFilterCategory(snapshot.data!);
-            } else if (snapshot.hasError) {
-              const Center(child: Text("NetWork"));
-            }
-            return const Center(
-              child: CircularProgressIndicator(),
+      ),
+      body: StreamBuilder(
+        stream: firestore.collection('produit').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Column(
+              children: [
+                LinearProgressIndicator(),
+                Expanded(
+                  child: Center(
+                    child: Text("Loading..."),
+                  ),
+                )
+              ],
             );
-          },
-        ));
+          }
+
+          return TabBarViewFilterCategory(
+              ProductModel.fetchProduit(snapshot.data!.docs));
+        },
+      ),
+    );
   }
 
   // ignore: non_constant_identifier_names
   TabBarView TabBarViewFilterCategory(List<ProductModel> productList) {
+    print(productList);
     return TabBarView(
       controller: _tabController,
       children: <Widget>[
