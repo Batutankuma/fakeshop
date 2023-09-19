@@ -2,9 +2,10 @@ import 'package:fakeshop/components/grid_view_component.dart';
 import 'package:fakeshop/models/product_model.dart';
 import 'package:fakeshop/services/product_service.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:http/http.dart' as http;
 
-class HomeView extends StatefulWidget{
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
@@ -12,33 +13,38 @@ class HomeView extends StatefulWidget{
 }
 
 class _HomeViewState extends State<HomeView> {
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("FakeShop", style: TextStyle(fontWeight: FontWeight.w700),),
-        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+        centerTitle: true,
+        title: Text(
+          "FakeShop".toUpperCase(),
+          style: const TextStyle(
+              fontWeight: FontWeight.w700, fontSize: 16, color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
         actions: const [
-          IconButton(onPressed: null, icon: Icon(Icons.search)),
-          IconButton(onPressed: null, icon: Icon(Icons.shop))
+          IconButton(
+              onPressed: null, icon: Icon(Icons.search, color: Colors.white)),
+          IconButton(
+              onPressed: null, icon: Icon(Icons.shop, color: Colors.white))
         ],
       ),
       body: FutureBuilder<List<ProductModel>>(
         future: fetchProductList(http.Client()),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return GridViewComponent(listProducts: snapshot.data!);
-          }else if(snapshot.hasError){
-            print("object");
-          }
+            return Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: GridViewComponent(listProducts: snapshot.data!));
+          } else if (snapshot.hasError) {}
           return const Center(
             child: CircularProgressIndicator(),
           );
         },
-      )
+      ),
     );
   }
 }

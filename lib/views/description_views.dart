@@ -35,6 +35,7 @@ class DescriptionView extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 20),
             //Price
             Flexible(
               child: Align(
@@ -57,7 +58,7 @@ class DescriptionView extends StatelessWidget {
                 style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     fontSize: 15,
-                    color: Colors.grey),
+                    color: Color.fromARGB(255, 61, 77, 76)),
               ),
             ),
             const SizedBox(height: 20),

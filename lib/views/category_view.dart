@@ -33,8 +33,10 @@ class CategoryViewState extends State<CategoryView>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Category",
-              style: TextStyle(fontWeight: FontWeight.w700)),
+          centerTitle: true,
+          title: Text("Category".toUpperCase(),
+              style: const TextStyle(
+                  fontWeight: FontWeight.w700, color: Colors.white)),
           actions: const [
             IconButton(onPressed: null, icon: Icon(Icons.search)),
             IconButton(onPressed: null, icon: Icon(Icons.shop))
@@ -67,9 +69,7 @@ class CategoryViewState extends State<CategoryView>
             if (snapshot.hasData) {
               return TabBarViewFilterCategory(snapshot.data!);
             } else if (snapshot.hasError) {
-              const Center(
-                child: Text("NetWork")
-              );
+              const Center(child: Text("NetWork"));
             }
             return const Center(
               child: CircularProgressIndicator(),

@@ -3,7 +3,7 @@ import 'package:fakeshop/views/home_views.dart';
 import 'package:fakeshop/views/setting_view.dart';
 import 'package:flutter/material.dart';
 
-class NavigationBarView extends StatefulWidget{
+class NavigationBarView extends StatefulWidget {
   const NavigationBarView({super.key});
 
   @override
@@ -12,12 +12,12 @@ class NavigationBarView extends StatefulWidget{
 
 class _NavigationBarViewState extends State<NavigationBarView> {
   //list of the page or view navigator
-  List<Widget> viewUI = [HomeView(),CategoryView(),SettingView()];
+  List<Widget> viewUI = [HomeView(), CategoryView(), SettingView()];
 
   //init index view page
   int indexView = 0;
 
-  void changeView(index){
+  void changeView(index) {
     setState(() {
       indexView = index;
     });
@@ -31,9 +31,10 @@ class _NavigationBarViewState extends State<NavigationBarView> {
         onTap: changeView,
         currentIndex: indexView,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: "Category"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings),label: "Setting")
+          BottomNavigationBarItem(icon: Icon(Icons.store), label: "Home"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category), label: "Category"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Setting")
         ],
       ),
     );
