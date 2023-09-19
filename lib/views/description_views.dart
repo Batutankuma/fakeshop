@@ -10,59 +10,81 @@ class DescriptionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Description",
-            style: TextStyle(fontWeight: FontWeight.w700)),
+        backgroundColor: Colors.transparent,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        child: ListView(
           children: [
             //image
-            Flexible(
-              flex: 2,
+            SizedBox(
+              height: 200,
+              width: 120,
               child: Image.network(productModel.image),
             ),
+            const SizedBox(height: 20),
             //title
             Flexible(
               flex: 1,
               child: Center(
-                child: Text(productModel.title.toUpperCase(),
-                    style: const TextStyle(fontWeight: FontWeight.w700)),
+                child: Text(
+                  productModel.title.toUpperCase(),
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 18),
+                ),
               ),
             ),
+            //Price
+            Flexible(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "\$ ${productModel.price}",
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w900, fontSize: 18),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             //subtitle
             Flexible(
               flex: 2,
               child: Text(
                 productModel.description,
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15,
+                    color: Colors.grey),
               ),
             ),
             const SizedBox(height: 20),
-            //price
-            SizedBox(
-              child: Row(
-                children: [
-                  Flexible(
-                    flex: 4,
-                    child: ElevatedButton(
-                      onPressed: null,
-                      child: Center(
-                        child: Text(
-                          productModel.price.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w800, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Flexible(
-                    flex: 1,
-                    child: IconButton(onPressed: null, icon: Icon(Icons.shop,color: Colors.black)),
-                  )
-                ],
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          children: [
+            Expanded(
+              child: TextButton.icon(
+                style: const ButtonStyle(
+                    iconColor: MaterialStatePropertyAll(Colors.black),
+                    backgroundColor: MaterialStatePropertyAll(Colors.teal)),
+                onPressed: null,
+                icon: const Icon(Icons.payment),
+                label: const Text(
+                  "Pay",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w800, color: Colors.white),
+                ),
               ),
-            )
+            ),
+            const IconButton(onPressed: null, icon: Icon(Icons.favorite)),
+            const IconButton(onPressed: null, icon: Icon(Icons.shop)),
+            const IconButton(
+                onPressed: null, icon: Icon(Icons.apple, color: Colors.black))
           ],
         ),
       ),
