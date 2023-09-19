@@ -1,4 +1,3 @@
-import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
 import 'package:fakeshop/views/description_views.dart';
 import 'package:flutter/material.dart';
