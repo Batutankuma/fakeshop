@@ -1,3 +1,4 @@
+import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
 import 'package:flutter/material.dart';
 
@@ -69,11 +70,24 @@ class DescriptionView extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
+              //btn pay produit
               child: TextButton.icon(
                 style: const ButtonStyle(
                     iconColor: MaterialStatePropertyAll(Colors.black),
                     backgroundColor: MaterialStatePropertyAll(Colors.teal)),
-                onPressed: null,
+                //logique de paiement
+                onPressed: () async {
+                  firestore.collection('achat').add({
+                    'produitid': 'produit/${productModel.id}',
+                    'userid': 'profil/${fireAuth.currentUser!.uid}'
+                  }).then(
+                    (value) => ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text("Paiement Effectuer"),
+                          backgroundColor: Colors.green),
+                    ),
+                  );
+                },
                 icon: const Icon(Icons.payment),
                 label: const Text(
                   "Pay",
@@ -84,8 +98,18 @@ class DescriptionView extends StatelessWidget {
             ),
             const IconButton(onPressed: null, icon: Icon(Icons.favorite)),
             const IconButton(onPressed: null, icon: Icon(Icons.shop)),
-            const IconButton(
-                onPressed: null, icon: Icon(Icons.apple, color: Colors.black))
+            IconButton(
+                onPressed: () async {
+                  final achat = firestore.collection('achat');
+                  final produit = firestore.collection('produit');
+                  final profil = firestore.collection('produit');
+                  final query = await achat
+                      .where('produitid', isEqualTo: produit.id)
+                      .where('produitid', isEqualTo: profil.id)
+                      .get();
+                  print(query);
+                },
+                icon: const Icon(Icons.apple, color: Colors.black))
           ],
         ),
       ),
