@@ -31,9 +31,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.tealAccent),
         useMaterial3: true,
       ),
-      home: fireAuth.currentUser == null
-          ? LoginView()
-          : const NavigationBarView(),
+      initialRoute: fireAuth.currentUser == null ? '/' : '/index',
+      routes: {
+        '/': (context) => LoginView(),
+        '/index': (context) => const NavigationBarView()
+      },
     );
   }
 }

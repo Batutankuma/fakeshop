@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fakeshop/components/grid_view_component.dart';
 import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
+import 'package:fakeshop/views/login_views.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,11 +24,17 @@ class _HomeViewState extends State<HomeView> {
               fontWeight: FontWeight.w700, fontSize: 16, color: Colors.white),
         ),
         backgroundColor: Colors.black,
-        actions: const [
-          IconButton(
+        actions: [
+          const IconButton(
               onPressed: null, icon: Icon(Icons.search, color: Colors.white)),
           IconButton(
-              onPressed: null, icon: Icon(Icons.shop, color: Colors.white))
+            onPressed: () => fireAuth.signOut().then((value) =>
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginView()),
+                    (route) => false)),
+            icon: const Icon(Icons.shop, color: Colors.white),
+          )
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(

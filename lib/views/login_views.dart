@@ -1,5 +1,6 @@
 import 'package:fakeshop/constant.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 // ignore: must_be_immutable
 class LoginView extends StatelessWidget {
@@ -84,8 +85,10 @@ class LoginView extends StatelessWidget {
                   fireAuth
                       .signInWithEmailAndPassword(
                           email: email.text, password: password.text)
-                      .then((value) => print(value))
-                      .catchError((error) => print(error))
+                      .then((value) => Navigator.pushNamedAndRemoveUntil(
+                          context, '/index', (route) => false))
+                      .catchError((error) => ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text("$error"))))
                 },
                 child: const Center(
                   child: Text(
