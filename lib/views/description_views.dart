@@ -79,8 +79,7 @@ class DescriptionView extends StatelessWidget {
                 onPressed: () async {
                   firestore.collection('achat').add({
                     'produitid': productModel.id,
-                    'userid': fireAuth.currentUser!.uid,
-                    'date_achat': DateTime.now()
+                    'userid': fireAuth.currentUser!.uid
                   }).then(
                     (value) => ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -99,9 +98,8 @@ class DescriptionView extends StatelessWidget {
             ),
             const IconButton(onPressed: null, icon: Icon(Icons.favorite)),
             const IconButton(onPressed: null, icon: Icon(Icons.shop)),
-            IconButton(
-                onPressed: () async {},
-                icon: const Icon(Icons.apple, color: Colors.black))
+            const IconButton(
+                onPressed: null, icon: Icon(Icons.apple, color: Colors.black))
           ],
         ),
       ),

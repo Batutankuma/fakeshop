@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fakeshop/services/historique.service.dart';
+import 'package:fakeshop/constant.dart';
+import 'package:fakeshop/models/product_model.dart';
+
+late ProductModel productModel;
 
 class StoryModel {
   final String id;
-  final String produitid;
+  final ProductModel produitid;
   final String userid;
   //date d'achat du produit
   final DateTime date;
@@ -15,10 +18,10 @@ class StoryModel {
       required this.date});
 
   factory StoryModel.fromJson(Map<String, dynamic> json, id) {
-    HistoriqueService.getById(json['produitid']);
+    getProduitDoc(json['produitid']);
     return StoryModel(
         id: id,
-        produitid: json['produitid'],
+        produitid: productModel,
         userid: json['userid'],
         date: convertTimestampToDatetime(json['date_achat']));
   }
@@ -32,4 +35,11 @@ class StoryModel {
 
 DateTime convertTimestampToDatetime(Timestamp timestamp) {
   return DateTime.fromMillisecondsSinceEpoch(timestamp.seconds * 1000);
+}
+
+Future<void> getProduitDoc(String idDoc) async {
+  final produitId = await firestore.collection('produit').doc(idDoc).get();
+  //assigner la valeur dans notre
+  productModel = ProductModel.fromJson(
+      produitId.data() as Map<String, dynamic>, produitId.id);
 }

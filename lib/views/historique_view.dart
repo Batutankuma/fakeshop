@@ -32,7 +32,6 @@ class HistoriqueView extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           } else {
-            //created(snapshot);
             List<StoryModel> story = StoryModel.fetchStory(snapshot.data!.docs);
             return ListView.builder(
               itemCount: story.length,
