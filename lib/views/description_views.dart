@@ -78,8 +78,9 @@ class DescriptionView extends StatelessWidget {
                 //logique de paiement
                 onPressed: () async {
                   firestore.collection('achat').add({
-                    'produitid': 'produit/${productModel.id}',
-                    'userid': 'profil/${fireAuth.currentUser!.uid}'
+                    'produitid': productModel.id,
+                    'userid': fireAuth.currentUser!.uid,
+                    'date_achat': DateTime.now()
                   }).then(
                     (value) => ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -99,16 +100,7 @@ class DescriptionView extends StatelessWidget {
             const IconButton(onPressed: null, icon: Icon(Icons.favorite)),
             const IconButton(onPressed: null, icon: Icon(Icons.shop)),
             IconButton(
-                onPressed: () async {
-                  final achat = firestore.collection('achat');
-                  final produit = firestore.collection('produit');
-                  final profil = firestore.collection('produit');
-                  final query = await achat
-                      .where('produitid', isEqualTo: produit.id)
-                      .where('produitid', isEqualTo: profil.id)
-                      .get();
-                  print(query);
-                },
+                onPressed: () async {},
                 icon: const Icon(Icons.apple, color: Colors.black))
           ],
         ),

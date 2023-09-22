@@ -93,7 +93,6 @@ class CategoryViewState extends State<CategoryView>
 
   // ignore: non_constant_identifier_names
   TabBarView TabBarViewFilterCategory(List<ProductModel> productList) {
-    print(productList);
     return TabBarView(
       controller: _tabController,
       children: <Widget>[
