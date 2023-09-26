@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fakeshop/constant.dart';
-import 'package:fakeshop/models/story.model.dart';
 import 'package:flutter/material.dart';
+import 'dart:core';
 
 class HistoriqueView extends StatelessWidget {
   const HistoriqueView({super.key});
@@ -25,25 +25,33 @@ class HistoriqueView extends StatelessWidget {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: firestore.collection('achat').snapshots(),
+        stream: firestore
+            .collection('achat')
+            .doc('nVhpDc9odRpJsDYmjNIT')
+            .collection('produit')
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
-            List<StoryModel> story = StoryModel.fetchStory(snapshot.data!.docs);
+            print(snapshot.data!.docs);
+            return Text("data");
+            /**
+             * List<StoryModel> story = StoryModel.fetchStory(snapshot.data!.docs);
             return ListView.builder(
               itemCount: story.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: const Text("iPhone"),
+                  title: Text(story[index].id),
                   subtitle: Text(
                     story[index].date.toString(),
                   ),
                 );
               },
             );
+             */
           }
         },
       ),

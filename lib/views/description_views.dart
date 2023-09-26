@@ -77,9 +77,12 @@ class DescriptionView extends StatelessWidget {
                     backgroundColor: MaterialStatePropertyAll(Colors.teal)),
                 //logique de paiement
                 onPressed: () async {
-                  firestore.collection('achat').add({
-                    'produitid': productModel.id,
-                    'userid': fireAuth.currentUser!.uid
+                  var produit =
+                      firestore.collection('produit').doc(productModel.id);
+                  firestore.collection('achat').doc().set({
+                    'produitid': produit,
+                    'userid': 'profil/${fireAuth.currentUser!.uid}',
+                    'date_achat': DateTime.now()
                   }).then(
                     (value) => ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
