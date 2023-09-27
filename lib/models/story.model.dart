@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
 
 class StoryModel {

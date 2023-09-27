@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/story.model.dart';
 import 'package:flutter/material.dart';
