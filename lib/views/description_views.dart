@@ -80,7 +80,7 @@ class DescriptionView extends StatelessWidget {
                   var produit =
                       firestore.collection('produit').doc(productModel.id);
                   firestore.collection('achat').doc().set({
-                    'produitid': produit,
+                    'produitid': produit.id,
                     'userid': 'profil/${fireAuth.currentUser!.uid}',
                     'date_achat': DateTime.now()
                   }).then(

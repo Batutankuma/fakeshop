@@ -1,30 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/product_model.dart';
 
 class StoryModel {
   final String id;
-  //final Map<String, dynamic> produitid;
+  final ProductModel produitid;
   final String userid;
   //date d'achat du produit
   final DateTime date;
-  late ProductModel productModel;
 
   StoryModel(
       {required this.id,
-      //required this.produitid,
+      required this.produitid,
       required this.userid,
       required this.date});
 
-  factory StoryModel.fromJson(Map<String, dynamic> json, id) {
+  factory StoryModel.fromJson(Map<String, dynamic> json) {
     return StoryModel(
-        id: id,
+        id: json['userid'],
+        produitid: ProductModel.fromJson(
+            json['produit'] as Map<String, dynamic>, json['produitid']),
         userid: json['userid'],
         date: convertTimestampToDatetime(json['date_achat']));
   }
 
-  static List<StoryModel> fetchStory(List<DocumentSnapshot> data) {
+  static List<StoryModel> fetchStory(List<Map<String, dynamic>> data) {
     return data.map((e) {
-      return StoryModel.fromJson(e.data() as Map<String, dynamic>, e.id);
+      return StoryModel.fromJson(e);
     }).toList();
   }
 }

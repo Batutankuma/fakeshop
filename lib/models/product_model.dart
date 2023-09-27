@@ -12,7 +12,7 @@ class ProductModel {
   ProductModel(this.id, this.title, this.price, this.category, this.description,
       this.image, this.rating);
 
-  factory ProductModel.fromJson(Map<String, dynamic> json, id) {
+  factory ProductModel.fromJson(Map<String, dynamic> json, String id) {
     return ProductModel(
       id,
       json['title'],
