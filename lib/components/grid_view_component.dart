@@ -34,15 +34,10 @@ class GridViewComponent extends StatelessWidget {
               padding: const EdgeInsets.all(5),
               child: Column(
                 children: [
-                  Flexible(flex: 3, child: Image.network(modelOne.image)),
                   Flexible(
-                      flex: 1,
-                      child: Text(
-                        modelOne.price.toString(),
-                        softWrap: true,
-                        textAlign: TextAlign.justify,
-                        overflow: TextOverflow.clip,
-                      )),
+                    flex: 3,
+                    child: Image.network(modelOne.image),
+                  ),
                   Flexible(
                     flex: 2,
                     child: Text(
@@ -52,6 +47,16 @@ class GridViewComponent extends StatelessWidget {
                       overflow: TextOverflow.clip,
                       style: const TextStyle(fontWeight: FontWeight.w700),
                       maxLines: 3,
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Text(
+                      '\$${modelOne.price.toString()}',
+                      softWrap: true,
+                      style: const TextStyle(fontWeight: FontWeight.w800),
+                      textAlign: TextAlign.justify,
+                      overflow: TextOverflow.clip,
                     ),
                   ),
                 ],

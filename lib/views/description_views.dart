@@ -11,7 +11,13 @@ class DescriptionView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor: Colors.black,
+        title: Text(
+          "DESCRIPTION".toUpperCase(),
+          style: const TextStyle(
+              fontWeight: FontWeight.w700, fontSize: 16, color: Colors.white),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -81,7 +87,7 @@ class DescriptionView extends StatelessWidget {
                       firestore.collection('produit').doc(productModel.id);
                   firestore.collection('achat').doc().set({
                     'produitid': produit.id,
-                    'userid': 'profil/${fireAuth.currentUser!.uid}',
+                    'userid': fireAuth.currentUser!.uid,
                     'date_achat': DateTime.now()
                   }).then(
                     (value) => ScaffoldMessenger.of(context).showSnackBar(

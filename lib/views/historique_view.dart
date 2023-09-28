@@ -1,5 +1,6 @@
 import 'package:fakeshop/constant.dart';
 import 'package:fakeshop/models/story.model.dart';
+import 'package:fakeshop/views/description_views.dart';
 import 'package:flutter/material.dart';
 import 'dart:core';
 
@@ -9,7 +10,10 @@ class HistoriqueView extends StatelessWidget {
   //filtrage joint firebase
   Future<List<Map<String, dynamic>>> achatList() async {
     List<Map<String, dynamic>> list = [];
-    var achat = await firestore.collection('achat').get();
+    var achat = await firestore
+        .collection('achat')
+        .where('userid', isEqualTo: fireAuth.currentUser!.uid)
+        .get();
     for (var element in achat.docs) {
       var produit =
           await firestore.collection('produit').doc(element['produitid']).get();
@@ -51,7 +55,25 @@ class HistoriqueView extends StatelessWidget {
               itemCount: story.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return DescriptionView(
+                            productModel: story[index].produitid);
+                      }),
+                    );
+                  },
                   title: Text(story[index].produitid.title),
+                  leading: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(story[index].produitid.image),
+                          fit: BoxFit.cover),
+                    ),
+                  ),
                   subtitle: Text(story[index].date.toString()),
                 );
               },

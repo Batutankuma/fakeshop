@@ -17,7 +17,6 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
         title: Text(
           "FakeShop".toUpperCase(),
           style: const TextStyle(
@@ -25,6 +24,9 @@ class _HomeViewState extends State<HomeView> {
         ),
         backgroundColor: Colors.black,
         actions: [
+          const IconButton(
+              onPressed: null,
+              icon: Icon(Icons.notifications, color: Colors.white)),
           const IconButton(
               onPressed: null, icon: Icon(Icons.search, color: Colors.white)),
           IconButton(
